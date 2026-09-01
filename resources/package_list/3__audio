@@ -1,0 +1,7 @@
+pamixer
+pipewire 
+pipewire-alsa 
+pipewire-jack 
+pipewire-pulse 
+pulsemixer 
+wireplumber

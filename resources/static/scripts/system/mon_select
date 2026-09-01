@@ -1,0 +1,10 @@
+#!/bin/bash
+
+DMENU_OPTS="$(dmenu_pos -w 20) -l 2 -g 2"
+
+case "$(printf "main\\nsecond\\nduplicated\\nextended" | dmenu $DMENU_OPTS )" in
+       "main") mon_main;;
+       "second") mon_second;;
+       "duplicated") mon_duplicated;;
+       "extended") mon_extended;;
+esac

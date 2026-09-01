@@ -1,0 +1,18 @@
+#!/bin/bash
+
+
+for arg in "$@"
+do
+  case $(file --mime-type "$arg" -b) in
+    text/*|application/json|inode/x-empty|application/x-subrip) setsid $TERMINAL $EDITOR $arg &;;
+    audio/*|video/x-ms-asf) setsid mpv --config-dir=$HOME/.config/mpv/audio-conf  $arg  &;;
+    video/*) setsid mpv --no-terminal $arg & ;;
+    image/*) setsid mpv --no-terminal --config-dir=$HOME/.config/mpv/img-conf $arg & ;;
+    application/pdf|application/vnd.djvu|application/epub*) setsid $TERMINAL zathura $arg & ;;
+    application/pgp-encrypted) setsid $TERMINAL $EDITOR $arg & ;;
+    application/javascript) setsid $TERMINAL $EDITOR $arg & ;;
+    inode/directory) setsid st -e lf & ;;
+    *)
+  esac
+done
+

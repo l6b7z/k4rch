@@ -1,0 +1,49 @@
+#!/bin/zsh
+
+# ── apps ─────────────────────────────────────────
+alias piano="vmpk"
+alias fm="pcmanfm"
+alias msg="caprine"
+alias lf="lfrun"
+alias office="libreoffice"
+alias neofetch="fastfetch"
+
+# ── editors ──────────────────────────────────────
+alias vim="nvim"
+alias v="nvim"
+alias svim="sudoedit"
+
+# ── package manager ──────────────────────────────
+alias x="yay -S"
+alias xr="yay -Rns"
+alias xs="yay -Ss"
+alias xl="yay -Q"
+alias xu="yay -Syu"
+alias xsp="pacman -Ss"
+
+# ── mounting ─────────────────────────────────────
+alias mnt="util-mount"
+alias umt="util-umount"
+alias umm="sudo umount -Rl /mnt"
+
+# ── safety / verbose ─────────────────────────────
+alias cp="cp -iv"
+alias mv="mv -iv"
+alias rm="rm -v"
+
+# ── listing ──────────────────────────────────────
+alias ls="lsd --group-directories-first"
+alias l="lsd -A -l --total-size --date +\"%d/%m %H:%M\" --group-directories-first --blocks date,size,name"
+alias ll="lsd -A -l --total-size --date +\"%d/%m/%Y %H:%M:%S\" --group-directories-first --blocks permission,user,group,date,size,name"
+
+# ── color ────────────────────────────────────────
+alias grep="grep --color=auto"
+alias diff="diff --color=auto"
+alias ip="ip -color=auto"
+alias ccat="highlight --out-format=ansi"
+
+# ── misc ─────────────────────────────────────────
+alias cls="clear"
+alias lp="util_loop_cmd"
+alias clipboard_copy="xsel --clipboard"
+alias duf="duf -hide special,fuse,loops,binds -output filesystem,mountpoint,size,used,usage"

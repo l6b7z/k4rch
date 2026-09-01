@@ -1,0 +1,12 @@
+#!/bin/bash
+kbd_map="$(setxkbmap -query | awk '/^layout/{print $2}')"
+kbdtoggle() {
+case $kbd_map in
+  "gb") setxkbmap pl -option "" -option caps:super,shift:both_capslock ; xset r rate 195 70 ; kbd_map="PL" ;;
+  "pl") setxkbmap gb -option "" -option caps:super,shift:both_capslock ; xset r rate 195 70 ; kbd_map="GB" ;;
+  esac
+}
+case $BLOCK_BUTTON in
+  1) kbdtoggle;;
+esac
+echo "$kbd_map"

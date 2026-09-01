@@ -1,0 +1,3 @@
+# Run dmenu (dwm runs dmenu when scroll lock xcape presses scrollock if super key pressed for less than 200ms)
+"appmenu"
+Scroll_Lock

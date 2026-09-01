@@ -1,0 +1,13 @@
+#!/bin/zsh -i
+
+eval "$1"
+sleep 1
+
+while [ 0 ]
+do 
+  clear 
+  eval "$1"
+  tiem=$(date '+ %a %d/%m/%Y %H:%M:%S')
+  [ -n "$2" ] && echo "$tiem next refresh in ${2} seconds"
+  sleep ${2:-0.5}
+done

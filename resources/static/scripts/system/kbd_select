@@ -1,0 +1,8 @@
+#!/bin/bash
+
+DMENU_OPTS="$(dmenu_pos -w 20) -l 1 -g 2"
+
+case "$(printf "english\\npolish" | dmenu $DMENU_OPTS )" in
+       "english") setxkbmap gb ; setxkbmap -option caps:hyper ; setxkbmap -option shift:both_capslock ; xset r rate 195 70 ;;
+       "polish")  setxkbmap pl ; setxkbmap -option caps:hyper ; setxkbmap -option shift:both_capslock ; xset r rate 195 70 ;;
+esac

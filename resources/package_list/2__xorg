@@ -1,0 +1,17 @@
+imlib2 
+libxft 
+libxinerama 
+wmctrl 
+xbindkeys 
+xcape 
+xclip 
+xcompmgr
+xdotool 
+xf86-video-intel 
+xorg-server 
+xorg-xbacklight 
+xorg-xev
+xorg-xinit 
+xorg-xrandr 
+xorg-xset 
+xsel

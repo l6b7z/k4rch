@@ -1,0 +1,12 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+
+  1) changevolume mute && kill -35 $(pidof dwmblocks) ;;
+	4) changevolume up   && kill -35 $(pidof dwmblocks) ;;
+	5) changevolume down && kill -35 $(pidof dwmblocks) ;;
+esac
+
+# remember to change status bar to refresh appropriately
+echo "$(date '+%b %a %d/%m/%Y %H:%M:%S')"
+# echo "$(date '+ %a %d/%m/%Y %H:%M')"

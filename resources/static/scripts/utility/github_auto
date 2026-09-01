@@ -1,0 +1,19 @@
+#!/bin/bash
+/home/l6b7/.static/resources/gh-auto
+
+github_auto_dir="/home/l6b7/.static/resources/gh-auto"
+readme="$github_auto_dir/README.md"
+varName="COMMIT "
+
+[[ ! -f $readme ]] && echo COMMIT 0 > $readme
+
+counter=$(sed -n "s/.*${varName}\(.*\)/\1/p" < "$readme")
+counter=$((counter+1))
+
+currentDate=$(date)
+
+echo "${currentDate}  COMMIT ${counter}" > $readme
+
+git -C $github_auto_dir add .
+git -C $github_auto_dir commit -m "commit number $counter"
+git -C $github_auto_dir push -u origin main

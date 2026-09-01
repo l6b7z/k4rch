@@ -1,0 +1,53 @@
+#!/bin/bash
+
+while getopts "x:y:h:w:" opt; do
+  case $opt in
+    x) x=$(calc -p "$ZK_MON_WIDTH  * ( $OPTARG / 100)") ;;
+    y) y=$(calc -p "$ZK_MON_HEIGHT * ( $OPTARG / 100)") ;;
+    h) h=$OPTARG ;;
+    w) w=$(calc -p "$ZK_MON_WIDTH  * ( $OPTARG / 100)") ;;
+  esac
+done
+
+opts=""
+
+# Height
+if [ ! $h = 0 ]
+then
+  opts="$opts -fn IosevkaNerdFont:size=${h} "
+else
+  h=$ZK_BASE_FONT_SIZE
+fi
+
+# Width
+if [ ! $w = 0 ]
+then
+  opts="$opts -z $w "
+fi
+
+# X axis
+# -x 00 -> workaround for 0th x cord 
+if [ ! $x = 0 ]
+then
+  opts="$opts -x $x "
+else
+  if [ ! $w = 0 ]
+  then
+    # if width then pos = mid point
+    opts="$opts -x $(calc -p "($ZK_MON_WIDTH / 2) - ($w / 2) -3") "
+  else
+    w=$(calc -p "( $ZK_DMENU_BAR_WIDTH / 100 ) * $ZK_MON_WIDTH")
+    opts="$opts -z $w "
+    opts="$opts -x $(calc -p "($ZK_MON_WIDTH / 2) - ($w / 2) -3") "
+  fi
+fi
+
+# Y axis 
+if [ ! $y = 0 ]
+then
+  opts="$opts -y $y "
+else
+  opts="$opts -y $(calc -p "$ZK_MON_HEIGHT / 2 - (($h - 2) * 0.80)") "
+fi
+
+echo $opts

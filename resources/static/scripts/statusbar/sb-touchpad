@@ -1,0 +1,18 @@
+#!/bin/bash
+
+tchtoggle() {
+    local s; s="$(xinput list-props 9 | awk '/Device Enabled/{print $NF}')"
+    xinput set-prop 9 "Device Enabled" "$((1-s))"
+}
+
+case $BLOCK_BUTTON in
+  1) tchtoggle;;
+esac
+
+tch="$(xinput list-props 9 | awk '/Device Enabled/{print $NF}')"
+case 1 in
+    $((tch == 1))) icon="󱓻 " ;;
+    *)             icon="󱓼 " ;;
+esac
+
+echo $icon

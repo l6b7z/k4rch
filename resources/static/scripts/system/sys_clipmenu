@@ -1,0 +1,5 @@
+#!/bin/bash
+
+DMENU_OPTS="$(dmenu_pos -w 60 -y 60) -l 8"
+
+clipmenu $DMENU_OPTS

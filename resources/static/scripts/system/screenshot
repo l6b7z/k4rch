@@ -1,0 +1,12 @@
+#!/bin/bash
+
+output="$ZK_DIR_SCREENSHOT$(date '+%Y%m%d-%H%M%S')-screenshot.png"
+xclip_cmd="xclip -sel clip -t image/png"
+
+DMENU_OPTS="$(dmenu_pos -w 20) -l 2"
+
+case $(echo -e "screenshot\\nscreenshot_to_clipboard" | dmenu $DMENU_OPTS ) in
+    "screenshot") maim -u -s "${output}" ;;
+    "screenshot_to_clipboard") maim -u -s | ${xclip_cmd} ;;
+esac
+

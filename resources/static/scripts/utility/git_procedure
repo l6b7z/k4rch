@@ -1,0 +1,17 @@
+#!/bin/bash
+
+currentDir=$PWD
+gitDir=$1
+
+[[ ! -z "$1" ]] && cd $gitDir
+
+echo "Directory ->"$PWD
+git status 
+
+sleep 1 
+
+git add .
+git commit -m "quicksave"
+git push -u origin main
+
+[[ ! -z "$1" ]] && cd $currentDir

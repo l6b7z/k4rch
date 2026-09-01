@@ -1,0 +1,18 @@
+#!/bin/bash
+
+kbdtoggle() {
+    local s; s="$(xinput list-props 8 | awk '/Device Enabled/{print $NF}')"
+    xinput set-prop 8 "Device Enabled" "$((1-s))"
+}
+
+case $BLOCK_BUTTON in
+  1) kbdtoggle;;
+esac
+
+kbd="$(xinput list-props 8 | awk '/Device Enabled/{print $NF}')"
+case 1 in
+    $((kbd == 1))) icon="󰌌" ;;
+    *)             icon="󰌐";;
+esac
+
+echo $icon

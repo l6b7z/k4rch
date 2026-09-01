@@ -1,0 +1,14 @@
+#!/bin/bash
+
+clear
+
+if [ -f "a.out" ]; then  
+  # echo "recompile"
+  rm a.out
+else
+  echo "fresh compile"
+fi
+
+gcc -g main.c
+
+./a.out

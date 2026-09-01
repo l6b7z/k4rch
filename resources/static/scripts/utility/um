@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [[ ! -d "$1" ]];then
+  echo "um: no such directory: $1"
+  exit
+fi
+
+sudo umount -Rl $1
+sync

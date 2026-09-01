@@ -1,0 +1,42 @@
+map i recolor
+unmap q
+map r reload
+unmap f
+map f toggle_fullscreen
+map [fullscreen] f toggle_fullscreen
+map      b toggle_statusbar
+map Left scroll full-up
+map left scroll full-up
+
+map   <Left> scroll full-up
+map   <Right> scroll full-down
+
+map   h scroll full-up
+map   l scroll full-down
+
+map = zoom in
+set guioptions "s"
+
+# Open document in fit-width mode by default
+set adjust-open "best-fit"
+
+# One page per row by default
+set pages-per-row 1
+
+#stop at page boundries
+set scroll-page-aware "true"
+set scroll-full-overlap 0.01
+set scroll-step 100
+
+#zoom settings
+set zoom-min 10
+
+set font "Iosevka Nerd Font 10"
+
+set default-bg                  "#000000" # base02
+# set default-fg                  "#00ff00" # base1
+# set statusbar-bg            "#141A20"
+set statusbar-fg            "#00ff00"
+
+# set inputbar-bg             "#0F1419"
+# set inputbar-fg             "#A3ACB7"

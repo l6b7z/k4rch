@@ -1,0 +1,3 @@
+#!/bin/bash
+dir="${2:-$PWD}"
+find "$dir" -iname "*$1*"

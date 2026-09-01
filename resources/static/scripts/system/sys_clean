@@ -1,0 +1,7 @@
+#!/bin/bash
+
+yay -Scc --noconfirm
+yay -Yc --noconfirm
+rm -rf $HOME/.local/share/Trash
+rm -rf ~/.cache/*
+sudo rm -rf /var/log/*

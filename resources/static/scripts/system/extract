@@ -1,0 +1,24 @@
+#!/bin/bash
+
+for arg  in "$@"
+do
+
+  arg=$(echo $arg | sed 's/\/.*\///g')
+  mv "$arg" $(echo "$arg" | sed 's/ /-/g')
+  arg=$(echo "$arg" | sed 's/ /-/g')
+
+  case "$(xdg-mime query filetype $arg)" in
+    "application/zip" | "application/x-rar")
+      extension=4
+      filename=${arg::-$extension}
+      7z x $arg -o$filename;;
+    "application/x-tar") 
+      extension=4
+      filename=${arg::-$extension}
+      7z x $arg -o$filename;;
+    "application/gzip")
+      extension=7
+      filename=${arg::-$extension}
+      tar xf $arg --one-top-level=$filename;;
+  esac
+done

@@ -1,0 +1,29 @@
+#!/bin/bash
+
+source ~/.config/zsh/env-vars
+
+export baseFont=$ZK_BASE_FONT_SIZE
+
+
+# creating system wide scaling with env_var
+
+export dwmFont=$(calc -p   "4+(9  - ( 0.2  * (20 - ${ZK_BASE_FONT_SIZE})))")
+export dmenuFont=$(calc -p "18  - ( 1    * (20 - ${ZK_BASE_FONT_SIZE}))")
+export stFont=$(calc -p    "16  - ( 1    * (20 - ${ZK_BASE_FONT_SIZE}))")
+export barHeight=$(calc -p "${dwmFont} + 2")
+
+# TODO change hardcoded fotn to ENV VAR
+sed "0,/IosevkaNerdFont:size=.*\",/{s/IosevkaNerdFont:size=.*\",/IosevkaNerdFont:size=${dwmFont}\",/}" -i ~/.static/src/dwm/config.h
+sed "0,/user_bh.*;/{s/user_bh.*;/user_bh = ${barHeight};/}" -i ~/.static/src/dwm/config.h
+sed "0,/IosevkaNerdFont:pixelsize=.*:antialias=true:autohint=true/{s/IosevkaNerdFont:pixelsize=.*:antialias=true:autohint=true/IosevkaNerdFont:pixelsize=${dmenuFont}:antialias=true:autohint=true/}" -i ~/.static/src/dmenu/config.h
+sed "0,/IosevkaNerdFont:pixelsize=.*:antialias=true:autohint=true/{s/IosevkaNerdFont:pixelsize=.*:antialias=true:autohint=true/IosevkaNerdFont:pixelsize=${stFont}:antialias=true:autohint=true/}" -i ~/.static/src/st/config.h
+
+
+sudo make -W  clean install -C ~/.static/src/clipmenu -s
+sudo make -W  clean install -C ~/.static/src/dmenu -s
+sudo make -W  clean install -C ~/.static/src/dwm -s
+sudo make -W  clean install -C ~/.static/src/dwmblocks-async -s
+sudo make -W  clean install -C ~/.static/src/st -s
+
+
+kill -HUP $(pidof dwm)

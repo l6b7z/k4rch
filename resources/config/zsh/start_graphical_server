@@ -1,0 +1,4 @@
+#!/bin/zsh
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty2 ]]; then
+  exec startx "$XINITRC" -- -auth "$XAUTHORITY"
+fi

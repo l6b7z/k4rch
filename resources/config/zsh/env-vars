@@ -1,0 +1,65 @@
+#!/bin/zsh
+
+# System settings
+export BROWSER="firefox"
+export EDITOR="nvim"
+export KRITA_NO_STYLE_OVERRIDE=1
+export MANPAGER='nvim +Man!'
+export PHONE=""
+export QT_QPA_PLATFORMTHEME="qt5ct"
+export TERMINAL="st"
+
+export ZK_BASE_FONT_SIZE=26
+export ZK_SYS_BACKLIGHT=75
+export ZK_SYS_KBD_FEEDBACK="195 70" # delay repetition
+export ZK_SYS_KBD_MAP="pl" # pl
+export ZK_SYS_UNCLUTTER=1
+
+export ZK_DMENU_BAR_WIDTH=45 # percentage of the screen width
+
+# Monitor
+export ZK_MON_WIDTH=1920
+export ZK_MON_HEIGHT=1080
+export ZK_MON_MAIN="eDP1"
+export ZK_MON_MAIN_REFRESH=60
+
+# Monitor Second
+export ZK_MON_SEC="DP1"
+export ZK_MON_SEC_REFRESH=60
+export ZK_MON_SEC_RES="1920x1080"
+export ZK_MON_SEC_POS="below" # above / below / left of....
+export ZK_MON_DUP_SCALE="1" # 1
+# export ZK_MON_DUP_SCALE="1.333" # 1
+
+# XDG base 
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+# Personal
+export ZK_DIR_MAIN="$HOME/main-dir"
+export ZK_DIR_STATIC="$HOME/.static"
+export ZK_DIR_CONFIG="$XDG_CONFIG_HOME"
+export ZK_DIR_RESOURCES="$ZK_DIR_STATIC/resources"
+export ZK_DIR_BIN="$ZK_DIR_STATIC/scripts"
+export ZK_DIR_SRC="$ZK_DIR_STATIC/src"
+export ZK_DIR_SCREENSHOT="$ZK_DIR_MAIN/media/screenshots"
+export ZK_DIR_RECORDING="$ZK_DIR_MAIN/media/recordings"
+
+# X / shell
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export XINITRC="$XDG_CONFIG_HOME/x11/xinitrc"
+
+# User dirs
+export XDG_DOWNLOAD_DIR="$ZK_DIR_MAIN/downloads"
+export XDG_DESKTOP_DIR="$HOME"
+export XDG_TEMPLATES_DIR="$HOME"
+export XDG_PUBLICSHARE_DIR="$HOME"
+export XDG_DOCUMENTS_DIR="$HOME"
+export XDG_MUSIC_DIR="$HOME"
+export XDG_PICTURES_DIR="$HOME"
+export XDG_VIDEOS_DIR="$HOME"
+
+# Misc
+export _JAVA_AWT_WM_NONREPARENTING=1
+export path_binary_ffmpeg="/usr/bin/ffmpeg"

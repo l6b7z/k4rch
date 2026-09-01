@@ -1,0 +1,31 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+  # 3) st -t ns -e pulsemixer;;    
+  1) changevolume mute;;
+	4) changevolume up;;
+	5) changevolume down;; 
+esac
+
+vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
+
+[ "$vol" != "${vol%\[MUTED\]}" ] && echo " M 󰖁" && exit
+
+vol="${vol#Volume: }"
+
+split() {
+    # For ommiting the . without calling and external program.
+    IFS=$2
+    set -- $1
+    printf '%s' "$@"
+}
+
+vol="$(printf "%2.0f" "$(split "$vol" ".")")"
+
+case 1 in
+    $((vol >= 100)) ) icon="󰕾" ;;
+    $((vol >= 1)) ) icon=" 󰕾" ;;
+    * ) icon=" 󰖁";;
+esac
+
+echo "$vol$icon"

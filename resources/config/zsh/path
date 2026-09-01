@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+export PATH="$PATH:${$(find ~/.static/scripts -type d -printf %p:)%%:}"

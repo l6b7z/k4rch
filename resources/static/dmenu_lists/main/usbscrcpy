@@ -1,0 +1,3 @@
+#!/bin/sh
+
+nohup st -e scrcpy --select-usb --no-audio &

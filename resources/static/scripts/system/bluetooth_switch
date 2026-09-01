@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ -f "/etc/systemd/system/bluetooth.target.wants/bluetooth.service" ]; then
+  sudo systemctl disable --now bluetooth.service;
+  dunstify -a "bt" -u low -r 9994 "Bluetooth Disabled" -t 500
+	pkill -RTMIN+4 "${STATUSBAR:-dwmblocks}"
+else
+  sudo systemctl enable --now bluetooth.service;
+  dunstify -a "bt" -u low -r 9994 "Bluetooth Enabled" -t 500
+	pkill -RTMIN+4 "${STATUSBAR:-dwmblocks}"
+fi

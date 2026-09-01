@@ -1,0 +1,25 @@
+#!/bin/bash
+case $BLOCK_BUTTON in
+ 1)
+  if [ -f "/etc/systemd/system/bluetooth.target.wants/bluetooth.service" ]; then
+     sudo systemctl disable --now bluetooth.service;
+     dunstify -a "bt" -u low -r 9994 "Bluetooth Disabled" -t 500
+   else
+     sudo systemctl enable --now bluetooth.service;
+     dunstify -a "bt" -u low -r 9994 "Bluetooth Enabled" -t 500
+   fi ;;
+ 3) 
+   if [ "$(bluetoothctl info | grep Missing)" = "Missing device address argument" ]; then
+   dunstify -t 1000 -u low -r 9995 "No Device Connected"
+   else
+   dunstify -t 1000 -u low -r 9995 "Device Connected"  "$(bluetoothctl info | grep Name | cut -f 2- -d ' ')"
+   fi ;;
+esac
+
+if [ -f "/etc/systemd/system/bluetooth.target.wants/bluetooth.service" ]; then
+  icon=""
+else
+  icon=""
+fi
+
+echo "$icon"

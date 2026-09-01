@@ -1,0 +1,14 @@
+#!/bin/sh
+
+
+d="/tmp/dmenu_fav_dir"
+
+touch $d
+
+p="/home/l6b7/.static/dmenu_lists/fav_dir"
+
+ls $p > $d
+sed -i -E '/^(#|$)/d' $d
+choice=$(dmenu $ZK_DMENU_OPTS_DEFAULT < $d) || exit 1
+
+$("$p/$choice")

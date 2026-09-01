@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# USERNAME="l6b7"
+
+# sed "0,/username/{s/username/$USERNAME/}" -i skip-username.conf 
+# sudo cp -v skip-username.conf /etc/systemd/system/getty@tty1.service.d/skip-username.conf
+
+# echo "usr  ::$USERNAME"
+
+sudo rm -rfv /etc/systemd/system/getty@tty1.service.d/
+sed "0,/username/{s/username/$USERNAME/}" -i autologin.conf 
+sudo mkdir -v /etc/systemd/system/getty@tty1.service.d/
+sudo cp -v autologin.conf /etc/systemd/system/getty@tty1.service.d/
+
+sed "0,/$USERNAME/{s/$USERNAME/username/}" -i autologin.conf 
+

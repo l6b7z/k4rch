@@ -1,0 +1,1 @@
+../../scripts/gallery-thumbgen.lua

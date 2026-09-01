@@ -1,0 +1,16 @@
+#!/bin/bash
+
+files=""
+
+for v in "$@"
+do
+  v=$(echo $v | sed 's/\/.*\///g')
+  files="$files $v"
+done
+
+clear
+
+echo -e "archive name.tar.gz"
+read name
+
+tar -cvf - $files | gzip -9 > "${name}.tar.gz"

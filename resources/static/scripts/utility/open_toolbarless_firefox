@@ -1,0 +1,3 @@
+#!/bin/bash
+
+librewolf -no-remote -P "toolbarless" -new-window "moz-extension://834e0cd9-8321-49ee-8457-9ff854200e4a/pages/blank.html"

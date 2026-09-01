@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# sudo install -m 755 lfrun /usr/local/bin/lfrun
+
+cleanup() {
+	exec 3>&- 2>/dev/null || true
+	[ -n "$UB_PID" ] && kill "$UB_PID" 2>/dev/null || true
+	[ -n "$FIFO_UEBERZUG" ] && rm -f "$FIFO_UEBERZUG"
+  clear
+}
+
+[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && exec lf "$@"
+
+mkdir -p "$HOME/.cache/lf"
+export FIFO_UEBERZUG="$HOME/.cache/lf/ueberzug-$$"
+mkfifo "$FIFO_UEBERZUG"
+
+# ueberzugpp layer -o x11 < "$FIFO_UEBERZUG" &
+ueberzugpp layer -o x11 < "$FIFO_UEBERZUG" >/tmp/ueberzugpp-lf.log 2>&1 &
+UB_PID=$!
+
+exec 3>"$FIFO_UEBERZUG"
+trap cleanup EXIT INT TERM
+
+lf "$@" 3>&-

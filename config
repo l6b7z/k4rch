@@ -1,0 +1,14 @@
+USERNAME="l6b7"
+PASSWORD="123"
+HOSTNAME="k4rchTest"
+
+BOOT_PARTITION_SIZE_MB=444
+
+# additional packages | setup-2-pacstrap.sh -> resources/packages_list
+PACMAN=""
+YAY=""
+
+KEYMAP="pl"
+LOCALE="en_GB.UTF-8 UTF-8\npl_PL.UTF-8 UTF-8"
+LOCALE_MAIN="en_GB.UTF-8"
+TIMEZONE="Europe/Warsaw"

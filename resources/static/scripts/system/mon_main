@@ -1,0 +1,6 @@
+#!/bin/bash
+
+xrandr --output $ZK_MON_MAIN --primary --mode "${ZK_MON_WIDTH}x${ZK_MON_HEIGHT}" --rate $ZK_MON_MAIN_REFRESH --scale 1x1
+xrandr --output $ZK_MON_SEC --off
+
+nitrogen --restore

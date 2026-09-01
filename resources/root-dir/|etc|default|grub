@@ -1,0 +1,22 @@
+#GRUB
+GRUB_DEFAULT=0
+GRUB_TIMEOUT=3
+GRUB_DISTRIBUTOR="Void"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=0 console=tty2"
+#console=tty2
+GRUB_DISABLE_SUBMENU=y
+GRUB_DISABLE_LINUX_UUID=true
+GRUB_DISABLE_RECOVERY=true
+#GRUB_BACKGROUND=
+GRUB_GFXMODE=1600x900x32
+GRUB_COLOR_NORMAL="magenta/black"
+GRUB_COLOR_HIGHLIGHT="light-magenta/black"
+#GRUB_HIDDEN_TIMEOUT=0
+#GRUB_HIDDEN_TIMEOUT_QUIET=false
+
+# Uncomment to disable graphical terminal
+# Uncomment to use basic console
+#GRUB_TERMINAL_INPUT="console"
+#GRUB_TERMINAL_OUTPUT=console
+# Uncomment and set to the desired menu colors.  Used by normal and wallpaper
+# modes only.  Entries specified as foreground/background.

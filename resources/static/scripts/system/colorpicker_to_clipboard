@@ -1,0 +1,2 @@
+#!/bin/bash
+sxcs --mag-filters "xhair,circle" --hex -o | awk '{printf $2}' | xclip -selection c

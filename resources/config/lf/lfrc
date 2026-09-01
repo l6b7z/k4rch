@@ -1,0 +1,412 @@
+# auto mount ?
+# o -> open with 
+# c -> convert
+# s -> send file ?
+
+# reset keybinds
+clearmaps
+
+### Go To
+map gS cd ~/.static/src
+map gb cd ~/.static/scripts
+map gd cd ~/main-dir/downloads
+map gh cd ~/main-dir
+map gr cd ~/.static/resources
+map gs cd ~/main-dir/media/scripts
+map gt cd ~/.local/share/Trash/files
+
+map gcc cd ~/.config
+map gcl cd ~/.config/lf
+map gcm cd ~/.config/mpv
+map gcv cd ~/.config/nvim
+map gcx cd ~/.config/x11
+map gcz cd ~/.config/zsh
+
+map gm cd ~/main-dir/media
+
+### functions
+map '\' $ printf '%s' "$fx" | xclip -i -selection clipboard
+map . set hidden!
+map / search
+map <backtab> :gdu ; unselect
+map <c-a> :unselect ; invert 
+map <enter> $$SHELL
+map <esc> :clear ; unselect
+map <f-1><f-1> :duf
+map <f-1>t test
+map <f-2> bulk-rename
+map <f-3> mkfile
+map <f-4> mkdir
+map <f-5> reload
+map <space> toggle
+map <tab> :toggle_preview 
+map D delete
+map F filter
+map G bottom
+map I reverse
+map N search-prev
+map Pd :$duplicate $f
+map Po :paste-overwrite
+map R :rename; cmd-end; cmd-delete-home # rename:|
+map U :$trash list --rev | fzf --multi | awk '{$1=$1;print}' | rev | cut -d ' ' -f1 | rev | xargs trash restore --match=exact --force
+map Y copyPath
+map [ :select-files
+map ] :select-dirs
+map ` shell
+map af followSoftLink
+map al createSoftLink 
+map an newfolderfrom
+map cd mkdir
+map cf mkfile
+map d :%trash $fx 
+map f :fzf_jump
+map g1 quick1
+map g2 quick2
+map g3 quick3
+map g4 quick4
+map g5 quick5
+map gc1 set_quick1
+map gc2 set_quick2
+map gc3 set_quick3
+map gc4 set_quick4
+map gc5 set_quick5
+map gg top
+map i invert
+map n search-next
+map on : open_new
+map p paste
+map q quit
+map r rename                            # rename:oldname|.jpeg
+map s :fzf_search
+map tc :$archivise $fx
+map tt :unarchive
+map u :%trash restore -fr 0  
+map x cut
+map y copy
+map ze :set sortby ext ; set reverse 'false'
+map zr :set reverse!
+map zs :set sortby size ; set reverse 'true'
+map zt :set sortby time ; set reverse 'true'
+map zz :set sortby natural ; set reverse 'false'
+
+# map <up> up
+# map <down> down
+# map <left> updir
+# map <right> open
+
+map k up
+map j down
+map h updir
+map l open
+
+map <s-right> openShift
+
+### Options
+# changeable
+set cursorpreviewfmt "" 
+set dircounts
+set hidden false
+set ignorecase true
+set info size
+set mouse false
+set ratios '1:1'
+set wrapscroll true
+
+# static
+set icons
+set previewer ~/.config/lf/preview
+set cleaner ~/.config/lf/cleaner
+set shell sh
+set shellopts '-eu'
+set ifs "\n"
+set scrolloff 10
+set dupfilefmt "%b~%n%e"
+set timefmt " 02/01/06 15:04:05"
+set statfmt "%t|-> %l"
+set promptfmt "\033[32;1m%d\033[0m\033[1m%f\033[0m"
+
+### Functions
+cmd toggle_preview %{{
+    if [ "$lf_preview" = "true" ]; then
+        lf -remote "send $id :set preview false; set ratios 1"
+    else
+        lf -remote "send $id :set preview true; set ratios 1:1"
+    fi
+}}
+
+cmd gdu ${{
+ clear
+ gdu -np
+ read -n 1 
+ clear
+}}
+
+
+cmd duf ${{
+ clear
+ duf --hide special --hide-mp /boot/efi
+ read -n 1
+ clear
+}}
+
+
+cmd on-cd &{{
+    # '&' commands run silently in background (which is what we want here),
+    # but are not connected to stdout.
+    # To make sure our escape sequence still reaches stdout we pipe it to /dev/tty
+    # printf "\033]0;lf $PWD \007" > /dev/tty
+    printf "\033]0;$PWD \007" > /dev/tty
+}}
+on-cd # print dir path in window title
+
+
+cmd delete ${{
+    clear
+    set -f
+    printf "%s\n\t" "$fx"
+    printf "delete?[y/N]"
+    read ans
+    [ $ans = "y" ] && rm -rf -- $fx
+    clear
+}}
+
+
+cmd mkdir ${{
+    clear  
+    printf "Directory Name: "
+    read ans
+    mkdir $ans
+    clear
+}}
+
+
+cmd mkfile ${{
+    clear
+    printf "File Name: "
+    read ans
+    touch $ans 
+    # $EDITOR $ans 
+    clear
+}}
+
+
+cmd unarchive ${{
+ extract  $fx
+}}
+
+cmd paste-overwrite %{{
+             mode=$(head -1 ~/.local/share/lf/files)
+             list=$(sed 1d ~/.local/share/lf/files)
+             if [ $mode = 'copy' ]; then
+                  cp -r $list .
+             elif [ $mode = 'move' ]; then
+                 mv $list .
+             fi
+             lf -remote 'send load'
+             lf -remote 'send clear'
+   }}
+
+cmd moveto ${{
+    set -f
+    clear; echo "Move to where?"
+    dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/bm-dirs | fzf | sed 's|~|$HOME|')" &&
+    for x in $fx; do
+        eval mv -iv \"$x\" \"$dest\"
+    done &&
+    clear
+}}
+
+
+cmd copyto ${{
+    set -f
+    clear; echo "Copy to where?"
+    dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | fzf | sed 's|~|$HOME|')" &&
+    for x in $fx; do
+        eval cp -ivr \"$x\" \"$dest\"
+    done &&
+    clear
+}}
+
+
+
+cmd copyPath ${{
+  #todo use different clipboard
+  echo -n "$f" | xsel --clipboard
+  clear
+}}
+
+cmd openShift ${{
+    clear
+    case $(file --mime-type "$(readlink -f $f)" -b) in
+    inode/directory) mpv --no-terminal --config-dir=$HOME/.config/mpv/audio-conf $f > /dev/null 2>&1 ;;
+    text.sh|text/x-shellscript) $SHELL $fx;;
+    text/html) $BROWSER --new-window $fx;;
+    image/*)  krita --nosplash $fx ;;
+      *) 
+    esac
+    clear
+    
+}}
+
+
+cmd open ${{
+    clear
+    case $(file --mime-type "$(readlink -f $f)" -b) in
+    text/*|application/json|inode/x-empty|application/x-subrip) $EDITOR $fx;;
+    video/*) mpv --no-terminal $f > /dev/null 2>&1 ;;
+    audio/*) mpv --no-terminal --config-dir=$HOME/.config/mpv/audio-conf $f > /dev/null 2>&1 ;;
+    image/*) mpv --no-terminal --config-dir=$HOME/.config/mpv/img-conf $f > /dev/null 2>&1 ;;
+    application/x-rar|application/pdf|application/vnd.djvu|application/epub*) zathura $fx  ;;
+    application/pgp-encrypted) $EDITOR $fx ;;
+    application/javascript) $EDITOR $fx ;;
+    application/octet-stream) $EDITOR $fx ;;
+    application/vnd.openxmlformats-officedocument.wordprocessingml.document) libreoffice $fx ;;
+      *)
+    esac
+    clear
+    
+}}
+
+
+
+cmd open_new ${{
+    clear
+    open_in_new $fx
+    clear
+}}
+
+cmd bulk-rename ${{
+    old="$(mktemp)"
+    new="$(mktemp)"
+    if [ -n "$fs" ]; then
+        fs="$(basename -a $fs)"
+    else
+        fs="$(ls)"
+    fi
+    printf '%s\n' "$fs" >"$old"
+    printf '%s\n' "$fs" >"$new"
+    $EDITOR "$new"
+    [ "$(wc -l < "$new")" -ne "$(wc -l < "$old")" ] && exit
+    paste "$old" "$new" | while IFS= read -r names; do
+        src="$(printf '%s' "$names" | cut -f1)"
+        dst="$(printf '%s' "$names" | cut -f2)"
+        if [ "$src" = "$dst" ] || [ -e "$dst" ]; then
+            continue
+        fi
+        mv -- "$src" "$dst"
+    done
+    rm -- "$old" "$new"
+    lf -remote "send $id unselect"
+    clear
+}}
+
+cmd createSoftLink ${{
+    clear
+    set -f
+    printf "[Create Softlink]\n"
+    printf "file:$f\n"
+    printf "name:$PWD/"
+    read name
+    ln -s $f "$name"
+    clear
+}}
+
+cmd followSoftLink ${{
+    clear
+    lf $(realpath $fx)
+    clear
+}}
+
+cmd newfolderfrom ${{
+    set -f
+    read newd
+    printf "Directory name: "
+    mkdir -- "$newd"
+    mv -- $fx "$newd"
+    clear
+}}
+
+
+cmd select-files &{{
+    get_files() {
+        if [ "$lf_hidden" = 'false' ]; then
+            find "$PWD" -mindepth 1 -maxdepth 1 -type f -not -name '.*' -print0
+        else
+            find "$PWD" -mindepth 1 -maxdepth 1 -type f -print0
+        fi |
+        xargs -0 printf ' %q'
+    }
+
+    lf -remote "send $id toggle $(get_files)"
+}}
+
+
+cmd select-dirs &{{
+    get_dirs() {
+        if [ "$lf_hidden" = 'false' ]; then
+            find "$PWD" -mindepth 1 -maxdepth 1 -type d -not -name '.*' -print0
+        else
+            find "$PWD" -mindepth 1 -maxdepth 1 -type d -print0
+        fi |
+        xargs -0 printf ' %q'
+    }
+
+    lf -remote "send $id toggle $(get_dirs)"
+}}
+
+
+cmd fzf_jump ${{
+    res="$(find . -maxdepth 9 | fzf --reverse --header='Jump to location')"
+    if [ -n "$res" ]; then
+        if [ -d "$res" ]; then
+            cmd="cd"
+        else
+            cmd="select"
+        fi
+        res="$(printf '%s' "$res" | sed 's/\\/\\\\/g;s/"/\\"/g')"
+        lf -remote "send $id $cmd \"$res\""
+    fi
+}}
+
+
+cmd fzf_search ${{
+    RG_PREFIX="rg --max-depth 9 --hidden --column --line-number --no-heading --color=always --smart-case "
+    res="$(
+        FZF_DEFAULT_COMMAND="$RG_PREFIX ''" \
+            fzf --bind "change:reload:$RG_PREFIX {q} || true" \
+            --ansi --layout=reverse --header 'Search in files' \
+            | cut -d':' -f1 | sed 's/\\/\\\\/g;s/"/\\"/g'
+    )"
+    [ -n "$res" ] && lf -remote "send $id select \"$res\""
+}}
+
+
+cmd phone ${{
+    clear  
+    kdeconnect-cli --device $PHONE --share $fx 
+    clear
+}}
+
+cmd test ${{
+  clear
+echo "f  :" $f
+echo "fs :" $fs
+echo "fx :" $fx 
+echo "id :" $id
+echo "pwd:" $PWD
+
+ read -n 1 
+}}
+
+
+cmd  quick1 ${{lf $(realpath /home/l6b7/.static/lf_lists/fav/fav_1)}}
+cmd  quick2 ${{lf $(realpath /home/l6b7/.static/lf_lists/fav/fav_2)}}
+cmd  quick3 ${{lf $(realpath /home/l6b7/.static/lf_lists/fav/fav_3)}}
+cmd  quick4 ${{lf $(realpath /home/l6b7/.static/lf_lists/fav/fav_4)}}
+cmd  quick5 ${{lf $(realpath /home/l6b7/.static/lf_lists/fav/fav_5)}}
+
+cmd  set_quick1 ${{rm /home/l6b7/.static/lf_lists/fav/fav_1 ; ln -s $PWD /home/l6b7/.static/lf_lists/fav/fav_1}}
+cmd  set_quick2 ${{rm /home/l6b7/.static/lf_lists/fav/fav_2 ; ln -s $PWD /home/l6b7/.static/lf_lists/fav/fav_2}}
+cmd  set_quick3 ${{rm /home/l6b7/.static/lf_lists/fav/fav_3 ; ln -s $PWD /home/l6b7/.static/lf_lists/fav/fav_3}}
+cmd  set_quick4 ${{rm /home/l6b7/.static/lf_lists/fav/fav_4 ; ln -s $PWD /home/l6b7/.static/lf_lists/fav/fav_4}}
+cmd  set_quick5 ${{rm /home/l6b7/.static/lf_lists/fav/fav_5 ; ln -s $PWD /home/l6b7/.static/lf_lists/fav/fav_5}}

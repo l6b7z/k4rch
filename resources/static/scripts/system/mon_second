@@ -1,0 +1,6 @@
+#!/bin/bash
+
+xrandr --output $ZK_MON_MAIN --off
+xrandr --output $ZK_MON_SEC --mode $ZK_MON_SEC_RES --scale 1x1
+
+nitrogen --restore

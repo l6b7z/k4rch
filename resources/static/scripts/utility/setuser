@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ ! -d "$1" ]] && [[ ! -f "$1" ]];then
+  echo "setuser: no such file or directory: $1"
+  exit
+fi
+
+sudo chgrp -R $USER $1
+sudo chown -R $USER $1
+
+lsd -A -l --total-size --date +"%d/%m/%Y %H:%M:%S" --group-directories-first --blocks permission,user,group,date,size,name | grep $1
