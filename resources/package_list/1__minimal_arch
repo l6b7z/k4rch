@@ -29,6 +29,7 @@ os-prober
 p7zip
 plocate
 ripgrep 
+rsync
 tldr 
 tree
 unrar 
