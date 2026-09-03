@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-source config
+source src/config
 USR="$USERNAME"
 
 LIVE_CFG="/home/$USR/.config"
@@ -20,4 +20,4 @@ rsync -a --delete "$LIVE_CFG/mpv/"     "$TARGET_CFG/mpv/"
 rsync -a --delete "$LIVE_CFG/nvim/"    "$TARGET_CFG/nvim/"
 rsync -a --delete "$LIVE_CFG/x11/"     "$TARGET_CFG/x11/"
 rsync -a --delete "$LIVE_CFG/zathura/" "$TARGET_CFG/zathura/"
-rsync -a --delete "$LIVE_CFG/zsh/"     "$TARGET_CFG/zsh/" --exclude='z_history'
+rsync -a --delete "$LIVE_CFG/zsh/"     "$TARGET_CFG/zsh/" --exclude='z_history' --exclude='.zcompdump*'

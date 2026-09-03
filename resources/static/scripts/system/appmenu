@@ -4,7 +4,7 @@ d="/tmp/app_menu"
 
 touch $d
 
-p="/home/l6b7/.static/dmenu_lists/main"
+p="$HOME/.static/dmenu_lists/main"
 
 ls $p > $d
 sed -i -E '/^(#|$)/d' $d

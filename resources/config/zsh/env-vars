@@ -12,7 +12,7 @@ export TERMINAL="st"
 export ZK_BASE_FONT_SIZE=26
 export ZK_SYS_BACKLIGHT=75
 export ZK_SYS_KBD_FEEDBACK="195 70" # delay repetition
-export ZK_SYS_KBD_MAP="pl" # pl
+export ZK_SYS_KBD_MAP="pl" 
 export ZK_SYS_UNCLUTTER=1
 
 export ZK_DMENU_BAR_WIDTH=45 # percentage of the screen width

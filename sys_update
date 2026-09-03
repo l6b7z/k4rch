@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-source config
+source src/config
 USR="$USERNAME"
 
 BACKUP_CFG="/home/$USR/k4rch/resources/config"
@@ -20,4 +20,4 @@ rsync -a --delete "$BACKUP_CFG/mpv/"     "$LIVE_CFG/mpv/"
 rsync -a --delete "$BACKUP_CFG/nvim/"    "$LIVE_CFG/nvim/"
 rsync -a --delete "$BACKUP_CFG/x11/"     "$LIVE_CFG/x11/"
 rsync -a --delete "$BACKUP_CFG/zathura/" "$LIVE_CFG/zathura/"
-rsync -a --delete "$BACKUP_CFG/zsh/"     "$LIVE_CFG/zsh/" --exclude='z_history'
+rsync -a --delete "$BACKUP_CFG/zsh/"     "$LIVE_CFG/zsh/" --exclude='z_history' --exclude='.zcompdump*'

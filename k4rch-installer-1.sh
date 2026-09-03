@@ -9,33 +9,33 @@ echo "nvim"
 
 sleep 2
 
-nvim config
+nvim src/config
 nvim resources/config/zsh/env-vars
 
 clear
 
-./delay_step 3 "installation"
+./src/delay_step 3 "installation"
 
-source setup-1-drive-layout.sh
+source src/setup-1-drive-layout.sh
 
-if [[ ! -f stop_install ]]; then
-  source setup-2-pacstrap-minimal.sh
+if [[ ! -f src/stop_install ]]; then
+  source src/setup-2-pacstrap-minimal.sh
 else
-  echo "Installation Failed at Step $(cat stop_install)" ; exit
+  echo "Installation Failed at Step $(cat src/stop_install)" ; exit
 fi
 
-if [[ ! -f stop_install ]]; then
-  source setup-3-post-pacstrap.sh
-  #setup-4-inside-chroot.sh <- run from setup-3
+if [[ ! -f src/stop_install ]]; then
+  source src/setup-3-post-pacstrap.sh
+  # src/setup-4-inside-chroot.sh <- run from setup-3
 else
-  echo "Installation Failed at Step $(cat stop_install)" ; exit
+  echo "Installation Failed at Step $(cat src/stop_install)" ; exit
 fi
 
-if [[ ! -f stop_install ]]; then
-  ./delay_step 6 "PC will reboot in 6 seconds"
+if [[ ! -f src/stop_install ]]; then
+  ./src/delay_step 6 "PC will reboot in 6 seconds"
   reboot
 else
-  echo "Installation Failed at Step $(cat stop_install)" ; exit
+  echo "Installation Failed at Step $(cat src/stop_install)" ; exit
 fi
 
-rm stop_install
+rm src/stop_install

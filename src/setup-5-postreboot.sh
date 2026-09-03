@@ -17,7 +17,7 @@ sleep 1
 clear
 
 rm -vf ~/.bash*
-rm -Rvf ~/.config
+[[ -d "$HOME/.static" ]] || rm -rvf "$HOME/.config"
 
 sleep 1
 
