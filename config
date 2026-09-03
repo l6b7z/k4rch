@@ -1,6 +1,6 @@
-USERNAME="l6b7"
-PASSWORD="123"
-HOSTNAME="k4rchTest"
+USERNAME="user"
+PASSWORD="pa$$word"
+HOSTNAME="hostname"
 
 BOOT_PARTITION_SIZE_MB=444
 

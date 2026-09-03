@@ -3,7 +3,6 @@
 clear
 
 if [ -f "a.out" ]; then  
-  # echo "recompile"
   rm a.out
 else
   echo "fresh compile"

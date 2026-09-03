@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -euo pipefail
+
+source config
+USR="$USERNAME"
+
+BACKUP_CFG="/home/$USR/k4rch/resources/config"
+BACKUP_STATIC="/home/$USR/k4rch/resources/static"
+
+LIVE_CFG="/home/$USR/.config"
+LIVE_STATIC="/home/$USR/.static"
+
+rsync -a --delete "$BACKUP_STATIC/"      "$LIVE_STATIC" --exclude='/scripts/personal' 
+
+rsync -a --delete "$BACKUP_CFG/dunst/"   "$LIVE_CFG/dunst/"
+rsync -a --delete "$BACKUP_CFG/htop/"    "$LIVE_CFG/htop/"
+rsync -a --delete "$BACKUP_CFG/lf/"      "$LIVE_CFG/lf/"
+rsync -a --delete "$BACKUP_CFG/mpv/"     "$LIVE_CFG/mpv/"
+rsync -a --delete "$BACKUP_CFG/nvim/"    "$LIVE_CFG/nvim/"
+rsync -a --delete "$BACKUP_CFG/x11/"     "$LIVE_CFG/x11/"
+rsync -a --delete "$BACKUP_CFG/zathura/" "$LIVE_CFG/zathura/"
+rsync -a --delete "$BACKUP_CFG/zsh/"     "$LIVE_CFG/zsh/" --exclude='z_history'

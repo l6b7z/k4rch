@@ -46,6 +46,9 @@ export ZK_DIR_SRC="$ZK_DIR_STATIC/src"
 export ZK_DIR_SCREENSHOT="$ZK_DIR_MAIN/media/screenshots"
 export ZK_DIR_RECORDING="$ZK_DIR_MAIN/media/recordings"
 
+# Pre Calculated Default DMENU POS Size
+export ZK_DMENU_OPTS_DEFAULT="$($ZK_DIR_BIN/utility/dmenu_pos)"
+
 # X / shell
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export XINITRC="$XDG_CONFIG_HOME/x11/xinitrc"

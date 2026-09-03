@@ -6,7 +6,7 @@
 #include "tile_wide.c"
 
 #define TERMINAL  "st"
-#define BROWSER   "librewolf"
+#define BROWSER   "firefox"
 #define STATUSBAR "dwmblocks"
 
 static const int wrapCursor          = 1; /* wraps cursor to selected window */

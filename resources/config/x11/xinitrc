@@ -25,7 +25,7 @@ unclutter --timeout 4 &
 fi
 
 # Screen Brightness
-xbacklight -set $ZK_SYS_BACKLIGHT
+brightnessctl set 100%
 
 # Clipboard
 clipmenud &

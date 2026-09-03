@@ -1,5 +1,7 @@
 #!/bin/bash
 
+read -rp "do you still have Internet Connection ? [y/N] " a; [[ $a == [yY] ]] || exit 1
+
 sudo sed -i '/^#\[multilib\]/,+1 s/^#//' /etc/pacman.conf
 sudo pacman -Syu
 

@@ -1,7 +1,0 @@
-#example-press
-"/home/l6b7/main-dir/media/scripts/bh"
-f 
-
-#example-press
-"sleep 0.01 ; rm /tmp/bh"
-f + Release

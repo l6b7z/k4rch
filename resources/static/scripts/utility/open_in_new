@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 for arg in "$@"
 do
   case $(file --mime-type "$arg" -b) in
